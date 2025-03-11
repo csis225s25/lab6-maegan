@@ -10,7 +10,11 @@ import javax.swing.event.*;
  * @author Ira Goldstein
  * @version Spring 2025
  */
-public class MouseDemo implements Runnable, MouseListener, MouseMotionListener, MouseWheelListener {
+public class MouseDemo extends MouseAdapter implements Runnable {
+
+	String toDisplay = "Mouse Around and See!";
+	int counter = 0;
+	JPanel panel;
 
 	/**
 	 * The run method to set up the graphical user interface
@@ -25,7 +29,7 @@ public class MouseDemo implements Runnable, MouseListener, MouseMotionListener, 
 
 		// construct an anonymous class that extends JPanel,
 		// for which we override the paintComponent method
-		JPanel panel = new JPanel() {
+		panel = new JPanel() {
 			@Override
 			public void paintComponent(Graphics g) {
 
@@ -33,7 +37,6 @@ public class MouseDemo implements Runnable, MouseListener, MouseMotionListener, 
 
 				FontMetrics fm = g.getFontMetrics();
 
-				String toDisplay = "Mouse Around and See!";
 				int stringWidth = fm.stringWidth(toDisplay);
 				int stringAscent = fm.getAscent();
 
@@ -55,43 +58,46 @@ public class MouseDemo implements Runnable, MouseListener, MouseMotionListener, 
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("mouseClicked: " + e);
+		toDisplay = "mouseClicked! ";
+		panel.repaint();
+		// System.out.println("mouseClicked: " + e);
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("mousePressed: " + e);
+		// System.out.println("mousePressed: " + e);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		System.out.println("mouseReleased: " + e);
+		// System.out.println("mouseReleased: " + e);
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		System.out.println("mouseEntered: " + e);
+		// System.out.println("mouseEntered: " + e);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		System.out.println("mouseExited: " + e);
+		// System.out.println("mouseExited: " + e);
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		System.out.println("mouseDragged: " + e);
+		// System.out.println("mouseDragged: " + e);
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		System.out.println("mouseMoved: " + e);
+		// System.out.println("mouseMoved: " + e);
 	}
-
-	@Override
-	public void mouseWheelMoved(MouseWheelEvent e) {
-		System.out.println("mouseWheelMoved: " + e);
-	}
+	/*
+	 * @Override
+	 * public void mouseWheelMoved(MouseWheelEvent e) {
+	 * //System.out.println("mouseWheelMoved: " + e);
+	 * }
+	 */
 
 	public static void main(String args[]) {
 		javax.swing.SwingUtilities.invokeLater(new MouseDemo());
